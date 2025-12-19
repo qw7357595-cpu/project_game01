@@ -1,0 +1,50 @@
+[
+    {
+        "source_type": "elite",
+        "source_id": "any",
+        "drop_type": "item",
+        "target_id": "SK_SCROLL",
+        "chance": "0.08",
+        "description": "菁英掉落殘卷"
+    },
+    {
+        "source_type": "boss",
+        "source_id": "BOSS_FIRE",
+        "drop_type": "skill",
+        "target_id": "SK_BOSS_FIRE_ULT",
+        "chance": "0.3",
+        "description": "火Boss功法"
+    },
+    {
+        "source_type": "boss",
+        "source_id": "BOSS_WATER",
+        "drop_type": "skill",
+        "target_id": "SK_BOSS_WATER_ULT",
+        "chance": "0.3",
+        "description": "水Boss功法"
+    },
+    {
+        "source_type": "boss",
+        "source_id": "BOSS_WOOD",
+        "drop_type": "skill",
+        "target_id": "SK_BOSS_WOOD_ULT",
+        "chance": "0.3",
+        "description": "木Boss功法"
+    },
+    {
+        "source_type": "boss",
+        "source_id": "BOSS_METAL",
+        "drop_type": "skill",
+        "target_id": "SK_BOSS_METAL_ULT",
+        "chance": "0.3",
+        "description": "金Boss功法"
+    },
+    {
+        "source_type": "boss",
+        "source_id": "BOSS_EARTH",
+        "drop_type": "skill",
+        "target_id": "SK_BOSS_EARTH_ULT",
+        "chance": "0.3",
+        "description": "土Boss功法"
+    }
+]

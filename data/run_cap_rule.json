@@ -1,0 +1,128 @@
+[
+    {
+        "effect_type": "damage_mul",
+        "max_value": "1.2",
+        "apply_layer": "runtime",
+        "boss_override": "TRUE",
+        "description": "最多額外傷害 +120%"
+    },
+    {
+        "effect_type": "def_mul",
+        "max_value": "1",
+        "apply_layer": "runtime",
+        "boss_override": "TRUE",
+        "description": "防禦最多 +100%"
+    },
+    {
+        "effect_type": "max_hp_mul",
+        "max_value": "1",
+        "apply_layer": "persistent",
+        "boss_override": "TRUE",
+        "description": "最大生命最多 +100%"
+    },
+    {
+        "effect_type": "crit_rate",
+        "max_value": "0.25",
+        "apply_layer": "runtime",
+        "boss_override": "TRUE",
+        "description": "暴擊率最大 +25%"
+    },
+    {
+        "effect_type": "armor_pen",
+        "max_value": "0.25",
+        "apply_layer": "runtime",
+        "boss_override": "TRUE",
+        "description": "破甲最大 +25%"
+    },
+    {
+        "effect_type": "burn_amp",
+        "max_value": "1",
+        "apply_layer": "runtime",
+        "boss_override": "TRUE",
+        "description": "燃燒傷害最多 +100%"
+    },
+    {
+        "effect_type": "control_amp",
+        "max_value": "0.3",
+        "apply_layer": "runtime",
+        "boss_override": "TRUE",
+        "description": "控制成功率最多 +30%"
+    },
+    {
+        "effect_type": "heal_amp",
+        "max_value": "0.6",
+        "apply_layer": "runtime",
+        "boss_override": "TRUE",
+        "description": "回復效果最多 +60%"
+    },
+    {
+        "effect_type": "follow_rate",
+        "max_value": "0.4",
+        "apply_layer": "runtime",
+        "boss_override": "TRUE",
+        "description": "追擊率最多 +40%"
+    },
+    {
+        "effect_type": "damage_reduce",
+        "max_value": "0.25",
+        "apply_layer": "runtime",
+        "boss_override": "TRUE",
+        "description": "減傷最多 +25%"
+    },
+    {
+        "effect_type": "lifesteal",
+        "max_value": "0.15",
+        "apply_layer": "runtime",
+        "boss_override": "TRUE",
+        "description": "吸血最多 +15%"
+    },
+    {
+        "effect_type": "dodge_gain",
+        "max_value": "0.2",
+        "apply_layer": "runtime",
+        "boss_override": "TRUE",
+        "description": "閃避率最多 +20%"
+    },
+    {
+        "effect_type": "counter_on_hit",
+        "max_value": "0.4",
+        "apply_layer": "runtime",
+        "boss_override": "TRUE",
+        "description": "反擊率最多 40%"
+    },
+    {
+        "effect_type": "energy_on_kill",
+        "max_value": "40",
+        "apply_layer": "runtime",
+        "boss_override": "TRUE",
+        "description": "每次擊殺最大回復 40 點內力"
+    },
+    {
+        "effect_type": "regen",
+        "max_value": "0.1",
+        "apply_layer": "runtime",
+        "boss_override": "TRUE",
+        "description": "回合回復最多 10%"
+    },
+    {
+        "effect_type": "crit_damage",
+        "max_value": "1",
+        "apply_layer": "runtime",
+        "boss_override": "TRUE",
+        "description": "爆傷最多 +100%"
+    },
+    {
+        "effect_type": "damage_echo",
+        "max_value": "0.6",
+        "apply_layer": "runtime",
+        "boss_override": "TRUE",
+        "description": "回溯反擊最多 60%"
+    },
+    {
+        "effect_type": "burn_core_stage",
+        "max_value": "1",
+        "apply_layer": "persistent",
+        "boss_override": "FALSE",
+        "description": "本次Run燃燒系統核心階段解鎖"
+    }
+]

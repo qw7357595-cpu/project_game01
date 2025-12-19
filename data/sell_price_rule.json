@@ -1,0 +1,74 @@
+[
+    {
+        "category": "consumable",
+        "sell_ratio": "0.5",
+        "min_price": "5",
+        "note": "補品回收價為買價50%"
+    },
+    {
+        "category": "material",
+        "sell_ratio": "0.35",
+        "min_price": "10",
+        "note": "素材通常廉價"
+    },
+    {
+        "category": "weapon_base",
+        "sell_ratio": "0.4",
+        "min_price": "100",
+        "note": "基底武器"
+    },
+    {
+        "category": "weapon_mid",
+        "sell_ratio": "0.3",
+        "min_price": "300",
+        "note": "中階裝備"
+    },
+    {
+        "category": "weapon_high",
+        "sell_ratio": "0.25",
+        "min_price": "800",
+        "note": "高階裝備"
+    },
+    {
+        "category": "armor_base",
+        "sell_ratio": "0.4",
+        "min_price": "100",
+        "note": "初階防具"
+    },
+    {
+        "category": "armor_mid",
+        "sell_ratio": "0.3",
+        "min_price": "400",
+        "note": "中階防具"
+    },
+    {
+        "category": "artifact_weapon",
+        "sell_ratio": "0.0",
+        "min_price": "0",
+        "note": "神器不可販售"
+    },
+    {
+        "category": "artifact_armor",
+        "sell_ratio": "0.0",
+        "min_price": "0",
+        "note": "神器不可販售"
+    },
+    {
+        "category": "jade",
+        "sell_ratio": "0.6",
+        "min_price": "800",
+        "note": "玉類極稀有"
+    },
+    {
+        "category": "boss_item",
+        "sell_ratio": "0.0",
+        "min_price": "0",
+        "note": "功法、唯一物不可販售"
+    },
+    {
+        "category": "permanent",
+        "sell_ratio": "0.0",
+        "min_price": "0",
+        "note": "五行丹不可販售"
+    }
+]

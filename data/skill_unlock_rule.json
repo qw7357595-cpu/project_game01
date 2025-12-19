@@ -1,0 +1,127 @@
+[
+    {
+        "skill_id": "SK_FIRE_1",
+        "unlock_player_level": "1.0",
+        "description": "初階解鎖"
+    },
+    {
+        "skill_id": "SK_WATER_1",
+        "unlock_player_level": "1.0",
+        "description": "初階解鎖"
+    },
+    {
+        "skill_id": "SK_WOOD_1",
+        "unlock_player_level": "1.0",
+        "description": "初階解鎖"
+    },
+    {
+        "skill_id": "SK_METAL_1",
+        "unlock_player_level": "1.0",
+        "description": "初階解鎖"
+    },
+    {
+        "skill_id": "SK_EARTH_1",
+        "unlock_player_level": "1.0",
+        "description": "初階解鎖"
+    },
+    {
+        "skill_id": "SK_FIRE_2",
+        "unlock_player_level": "10.0",
+        "description": "二階解鎖"
+    },
+    {
+        "skill_id": "SK_WATER_2",
+        "unlock_player_level": "10.0",
+        "description": "二階解鎖"
+    },
+    {
+        "skill_id": "SK_WOOD_2",
+        "unlock_player_level": "10.0",
+        "description": "二階解鎖"
+    },
+    {
+        "skill_id": "SK_METAL_2",
+        "unlock_player_level": "10.0",
+        "description": "二階解鎖"
+    },
+    {
+        "skill_id": "SK_EARTH_2",
+        "unlock_player_level": "10.0",
+        "description": "二階解鎖"
+    },
+    {
+        "skill_id": "SK_FIRE_3",
+        "unlock_player_level": "25.0",
+        "description": "三階解鎖"
+    },
+    {
+        "skill_id": "SK_WATER_3",
+        "unlock_player_level": "25.0",
+        "description": "三階解鎖"
+    },
+    {
+        "skill_id": "SK_WOOD_3",
+        "unlock_player_level": "25.0",
+        "description": "三階解鎖"
+    },
+    {
+        "skill_id": "SK_METAL_3",
+        "unlock_player_level": "25.0",
+        "description": "三階解鎖"
+    },
+    {
+        "skill_id": "SK_EARTH_3",
+        "unlock_player_level": "25.0",
+        "description": "三階解鎖"
+    },
+    {
+        "skill_id": "SK_FIRE_3T",
+        "unlock_player_level": "30.0",
+        "description": "質變解鎖"
+    },
+    {
+        "skill_id": "SK_WATER_3T",
+        "unlock_player_level": "30.0",
+        "description": "質變解鎖"
+    },
+    {
+        "skill_id": "SK_WOOD_3T",
+        "unlock_player_level": "30.0",
+        "description": "質變解鎖"
+    },
+    {
+        "skill_id": "SK_METAL_3T",
+        "unlock_player_level": "30.0",
+        "description": "質變解鎖"
+    },
+    {
+        "skill_id": "SK_EARTH_3T",
+        "unlock_player_level": "30.0",
+        "description": "質變解鎖"
+    },
+    {
+        "skill_id": "SK_BOSS_FIRE_ULT",
+        "unlock_player_level": "0.0",
+        "description": "Boss 掉落解鎖"
+    },
+    {
+        "skill_id": "SK_BOSS_WATER_ULT",
+        "unlock_player_level": "",
+        "description": "Boss 掉落解鎖"
+    },
+    {
+        "skill_id": "SK_BOSS_WOOD_ULT",
+        "unlock_player_level": "0.0",
+        "description": "Boss 掉落解鎖"
+    },
+    {
+        "skill_id": "SK_BOSS_METAL_ULT",
+        "unlock_player_level": "0.0",
+        "description": "Boss 掉落解鎖"
+    },
+    {
+        "skill_id": "SK_BOSS_EARTH_ULT",
+        "unlock_player_level": "0.0",
+        "description": "Boss 掉落解鎖"
+    }
+]

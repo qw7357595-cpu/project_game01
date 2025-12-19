@@ -1,0 +1,26 @@
+[
+    {
+        "trigger_type": "normal",
+        "floor_mod": "5",
+        "reward_type": "perk",
+        "refresh": "1",
+        "count": "1",
+        "description": "每 5 層給一次三選一"
+    },
+    {
+        "trigger_type": "boss",
+        "floor_mod": "1",
+        "reward_type": "perk",
+        "refresh": "1",
+        "count": "1",
+        "description": "Boss 層必定給"
+    },
+    {
+        "trigger_type": "event",
+        "floor_mod": "0",
+        "reward_type": "perk",
+        "refresh": "1",
+        "count": "1",
+        "description": "特殊事件結束後給一次"
+    }
+]

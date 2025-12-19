@@ -1,0 +1,82 @@
+[
+    {
+        "floor_start": "1",
+        "floor_end": "19",
+        "min_level": "1",
+        "max_level": "5",
+        "elite_rate": "0.05",
+        "boss_floor": "FALSE"
+    },
+    {
+        "floor_start": "20",
+        "floor_end": "20",
+        "min_level": "6",
+        "max_level": "7",
+        "elite_rate": "0.15",
+        "boss_floor": "TRUE"
+    },
+    {
+        "floor_start": "21",
+        "floor_end": "39",
+        "min_level": "8",
+        "max_level": "12",
+        "elite_rate": "0.08",
+        "boss_floor": "FALSE"
+    },
+    {
+        "floor_start": "40",
+        "floor_end": "40",
+        "min_level": "13",
+        "max_level": "15",
+        "elite_rate": "0.2",
+        "boss_floor": "TRUE"
+    },
+    {
+        "floor_start": "41",
+        "floor_end": "59",
+        "min_level": "16",
+        "max_level": "20",
+        "elite_rate": "0.1",
+        "boss_floor": "FALSE"
+    },
+    {
+        "floor_start": "60",
+        "floor_end": "60",
+        "min_level": "22",
+        "max_level": "25",
+        "elite_rate": "0.25",
+        "boss_floor": "TRUE"
+    },
+    {
+        "floor_start": "61",
+        "floor_end": "79",
+        "min_level": "26",
+        "max_level": "32",
+        "elite_rate": "0.12",
+        "boss_floor": "FALSE"
+    },
+    {
+        "floor_start": "80",
+        "floor_end": "80",
+        "min_level": "34",
+        "max_level": "38",
+        "elite_rate": "0.3",
+        "boss_floor": "TRUE"
+    },
+    {
+        "floor_start": "81",
+        "floor_end": "99",
+        "min_level": "40",
+        "max_level": "48",
+        "elite_rate": "0.15",
+        "boss_floor": "FALSE"
+    },
+    {
+        "floor_start": "100",
+        "floor_end": "100",
+        "min_level": "50",
+        "max_level": "55",
+        "elite_rate": "0.35",
+        "boss_floor": "TRUE"
+    }
+]

@@ -1,0 +1,254 @@
+[
+    {
+        "material_id": "MAT_ORE_FIRE",
+        "display_name": "火焰礦石",
+        "category": "ore",
+        "rarity": "common",
+        "min_floor": "1",
+        "max_floor": "999",
+        "description": "中階火屬武器合成素材"
+    },
+    {
+        "material_id": "MAT_ORE_WATER",
+        "display_name": "寒潮礦石",
+        "category": "ore",
+        "rarity": "common",
+        "min_floor": "1",
+        "max_floor": "999",
+        "description": "中階水屬武器合成素材"
+    },
+    {
+        "material_id": "MAT_ORE_WOOD",
+        "display_name": "繁茂礦石",
+        "category": "ore",
+        "rarity": "common",
+        "min_floor": "1",
+        "max_floor": "999",
+        "description": "中階木屬武器合成素材"
+    },
+    {
+        "material_id": "MAT_ORE_METAL",
+        "display_name": "裂鋼礦石",
+        "category": "ore",
+        "rarity": "common",
+        "min_floor": "1",
+        "max_floor": "999",
+        "description": "中階金屬武器合成素材"
+    },
+    {
+        "material_id": "MAT_ORE_EARTH",
+        "display_name": "厚土礦石",
+        "category": "ore",
+        "rarity": "common",
+        "min_floor": "1",
+        "max_floor": "999",
+        "description": "中階土屬武器合成素材"
+    },
+    {
+        "material_id": "MAT_CORE_FIRE",
+        "display_name": "焚魂礦核",
+        "category": "core",
+        "rarity": "rare",
+        "min_floor": "30",
+        "max_floor": "999",
+        "description": "高階火屬武器核心石"
+    },
+    {
+        "material_id": "MAT_CORE_WATER",
+        "display_name": "霜魂礦核",
+        "category": "core",
+        "rarity": "rare",
+        "min_floor": "30",
+        "max_floor": "999",
+        "description": "高階水屬武器核心石"
+    },
+    {
+        "material_id": "MAT_CORE_WOOD",
+        "display_name": "靈木礦核",
+        "category": "core",
+        "rarity": "rare",
+        "min_floor": "30",
+        "max_floor": "999",
+        "description": "高階木屬武器核心石"
+    },
+    {
+        "material_id": "MAT_CORE_METAL",
+        "display_name": "鋒鋼礦核",
+        "category": "core",
+        "rarity": "rare",
+        "min_floor": "30",
+        "max_floor": "999",
+        "description": "高階金屬武器核心石"
+    },
+    {
+        "material_id": "MAT_CORE_EARTH",
+        "display_name": "鎮岳礦核",
+        "category": "core",
+        "rarity": "rare",
+        "min_floor": "30",
+        "max_floor": "999",
+        "description": "高階土屬武器核心石"
+    },
+    {
+        "material_id": "MAT_SOUL_CRYSTAL",
+        "display_name": "魂晶",
+        "category": "general",
+        "rarity": "uncommon",
+        "min_floor": "1",
+        "max_floor": "999",
+        "description": "防具與高階合成的通用核心素材"
+    },
+    {
+        "material_id": "MAT_SOUL_SAND",
+        "display_name": "鍛魂砂",
+        "category": "general",
+        "rarity": "uncommon",
+        "min_floor": "20",
+        "max_floor": "999",
+        "description": "高階與神器武器必要輔材"
+    },
+    {
+        "material_id": "MAT_SILK_RAW",
+        "display_name": "粗絲綢",
+        "category": "cloth",
+        "rarity": "common",
+        "min_floor": "1",
+        "max_floor": "999",
+        "description": "防具基礎材料"
+    },
+    {
+        "material_id": "MAT_SILK_FINE",
+        "display_name": "精絲綢",
+        "category": "cloth",
+        "rarity": "uncommon",
+        "min_floor": "10",
+        "max_floor": "999",
+        "description": "中階防具材料"
+    },
+    {
+        "material_id": "MAT_SILK_RUNE",
+        "display_name": "靈紋絲綢",
+        "category": "cloth",
+        "rarity": "rare",
+        "min_floor": "30",
+        "max_floor": "999",
+        "description": "高階與神器防具素材"
+    },
+    {
+        "material_id": "MAT_PEARL_RAW",
+        "display_name": "五行寶珠·粗糙",
+        "category": "enhance",
+        "rarity": "common",
+        "min_floor": "1",
+        "max_floor": "999",
+        "description": "中階道具與符咒強化材料"
+    },
+    {
+        "material_id": "MAT_PEARL_FINE",
+        "display_name": "五行寶珠·精緻",
+        "category": "enhance",
+        "rarity": "rare",
+        "min_floor": "30",
+        "max_floor": "999",
+        "description": "高階道具與符咒強化材料"
+    },
+    {
+        "material_id": "MAT_WOOD_HERB",
+        "display_name": "靈草",
+        "category": "herb",
+        "rarity": "common",
+        "min_floor": "1",
+        "max_floor": "999",
+        "description": "丹藥副材A"
+    },
+    {
+        "material_id": "MAT_NIGHT_ROOT",
+        "display_name": "夜露根",
+        "category": "herb",
+        "rarity": "common",
+        "min_floor": "1",
+        "max_floor": "999",
+        "description": "丹藥副材B"
+    },
+    {
+        "material_id": "MAT_HP_MAIN",
+        "display_name": "血靈草",
+        "category": "herb",
+        "rarity": "uncommon",
+        "min_floor": "10",
+        "max_floor": "999",
+        "description": "回血丹主藥材"
+    },
+    {
+        "material_id": "MAT_MP_MAIN",
+        "display_name": "氣元根",
+        "category": "herb",
+        "rarity": "uncommon",
+        "min_floor": "10",
+        "max_floor": "999",
+        "description": "回內丹主藥材"
+    },
+    {
+        "material_id": "MAT_PAPER_TALISMAN",
+        "display_name": "符紋靈紙",
+        "category": "paper",
+        "rarity": "shop_only",
+        "min_floor": "1",
+        "max_floor": "999",
+        "description": "符咒合成必備材料（商店限定）"
+    },
+    {
+        "material_id": "MAT_SPIRIT_FIRE",
+        "display_name": "火行元魄",
+        "category": "spirit",
+        "rarity": "rare",
+        "min_floor": "30",
+        "max_floor": "999",
+        "description": "火屬突破丹主材料"
+    },
+    {
+        "material_id": "MAT_SPIRIT_WATER",
+        "display_name": "水行元魄",
+        "category": "spirit",
+        "rarity": "rare",
+        "min_floor": "30",
+        "max_floor": "999",
+        "description": "水屬突破丹主材料"
+    },
+    {
+        "material_id": "MAT_SPIRIT_WOOD",
+        "display_name": "木行元魄",
+        "category": "spirit",
+        "rarity": "rare",
+        "min_floor": "30",
+        "max_floor": "999",
+        "description": "木屬突破丹主材料"
+    },
+    {
+        "material_id": "MAT_SPIRIT_METAL",
+        "display_name": "金行元魄",
+        "category": "spirit",
+        "rarity": "rare",
+        "min_floor": "30",
+        "max_floor": "999",
+        "description": "金屬突破丹主材料"
+    },
+    {
+        "material_id": "MAT_SPIRIT_EARTH",
+        "display_name": "土行元魄",
+        "category": "spirit",
+        "rarity": "rare",
+        "min_floor": "30",
+        "max_floor": "999",
+        "description": "土屬突破丹主材料"
+    },
+    {
+        "material_id": "MAT_SCROLL_FRAGMENT",
+        "display_name": "殘卷",
+        "category": "scroll",
+        "rarity": "uncommon",
+        "min_floor": "1",
+        "max_floor": "999",
+        "description": "用於解鎖或合成高階功法"
+    }
+]

@@ -1,0 +1,35 @@
+[
+    {
+        "source_type": "normal",
+        "source_id": "any",
+        "target_type": "currency",
+        "target_id": "CURRENCY_COPPER",
+        "min_qty": "5",
+        "max_qty": "15",
+        "min_floor": "1",
+        "max_floor": "999",
+        "rule_note": "普通怪掉落銅幣"
+    },
+    {
+        "source_type": "elite",
+        "source_id": "any",
+        "target_type": "currency",
+        "target_id": "CURRENCY_COPPER",
+        "min_qty": "15",
+        "max_qty": "40",
+        "min_floor": "1",
+        "max_floor": "999",
+        "rule_note": "菁英怪掉落銅幣"
+    },
+    {
+        "source_type": "boss",
+        "source_id": "any",
+        "target_type": "currency",
+        "target_id": "CURRENCY_COPPER",
+        "min_qty": "30",
+        "max_qty": "80",
+        "min_floor": "1",
+        "max_floor": "999",
+        "rule_note": "Boss 掉落銅幣"
+    }
+]

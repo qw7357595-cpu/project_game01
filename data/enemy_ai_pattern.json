@@ -1,0 +1,242 @@
+[
+    {
+        "enemy_id": "NM_FIRE_01",
+        "action_type": "attack",
+        "weight": "70",
+        "value": "1",
+        "cooldown": "0",
+        "description": "普攻"
+    },
+    {
+        "enemy_id": "NM_FIRE_01",
+        "action_type": "burn",
+        "weight": "30",
+        "value": "5",
+        "cooldown": "2",
+        "description": "燃燒（每回合5傷）"
+    },
+    {
+        "enemy_id": "NM_WATER_01",
+        "action_type": "attack",
+        "weight": "60",
+        "value": "1",
+        "cooldown": "0",
+        "description": "普攻"
+    },
+    {
+        "enemy_id": "NM_WATER_01",
+        "action_type": "stun",
+        "weight": "40",
+        "value": "1",
+        "cooldown": "3",
+        "description": "暈眩1回合"
+    },
+    {
+        "enemy_id": "NM_WOOD_01",
+        "action_type": "attack",
+        "weight": "60",
+        "value": "1",
+        "cooldown": "0",
+        "description": "普攻"
+    },
+    {
+        "enemy_id": "NM_WOOD_01",
+        "action_type": "regen",
+        "weight": "40",
+        "value": "5",
+        "cooldown": "3",
+        "description": "回復5HP"
+    },
+    {
+        "enemy_id": "NM_METAL_01",
+        "action_type": "attack",
+        "weight": "50",
+        "value": "1",
+        "cooldown": "0",
+        "description": "普攻"
+    },
+    {
+        "enemy_id": "NM_METAL_01",
+        "action_type": "follow",
+        "weight": "50",
+        "value": "1",
+        "cooldown": "2",
+        "description": "追擊"
+    },
+    {
+        "enemy_id": "NM_EARTH_01",
+        "action_type": "attack",
+        "weight": "60",
+        "value": "1",
+        "cooldown": "0",
+        "description": "普攻"
+    },
+    {
+        "enemy_id": "NM_EARTH_01",
+        "action_type": "shield",
+        "weight": "40",
+        "value": "20",
+        "cooldown": "3",
+        "description": "獲得20護盾"
+    },
+    {
+        "enemy_id": "EL_FIRE_01",
+        "action_type": "attack",
+        "weight": "50",
+        "value": "1",
+        "cooldown": "0",
+        "description": "普攻"
+    },
+    {
+        "enemy_id": "EL_FIRE_01",
+        "action_type": "burn",
+        "weight": "50",
+        "value": "10",
+        "cooldown": "2",
+        "description": "高燃燒傷害"
+    },
+    {
+        "enemy_id": "EL_WATER_01",
+        "action_type": "attack",
+        "weight": "50",
+        "value": "1",
+        "cooldown": "0",
+        "description": "普攻"
+    },
+    {
+        "enemy_id": "EL_WATER_01",
+        "action_type": "freeze",
+        "weight": "50",
+        "value": "1",
+        "cooldown": "3",
+        "description": "冰凍1回合"
+    },
+    {
+        "enemy_id": "EL_WOOD_01",
+        "action_type": "attack",
+        "weight": "50",
+        "value": "1",
+        "cooldown": "0",
+        "description": "普攻"
+    },
+    {
+        "enemy_id": "EL_WOOD_01",
+        "action_type": "lifesteal",
+        "weight": "50",
+        "value": "0.1",
+        "cooldown": "0",
+        "description": "吸血10%"
+    },
+    {
+        "enemy_id": "EL_METAL_01",
+        "action_type": "attack",
+        "weight": "30",
+        "value": "1",
+        "cooldown": "0",
+        "description": "普攻"
+    },
+    {
+        "enemy_id": "EL_METAL_01",
+        "action_type": "double_hit",
+        "weight": "70",
+        "value": "2",
+        "cooldown": "2",
+        "description": "雙擊（造成2倍傷害）"
+    },
+    {
+        "enemy_id": "EL_EARTH_01",
+        "action_type": "attack",
+        "weight": "50",
+        "value": "1",
+        "cooldown": "0",
+        "description": "普攻"
+    },
+    {
+        "enemy_id": "EL_EARTH_01",
+        "action_type": "counter",
+        "weight": "50",
+        "value": "12",
+        "cooldown": "2",
+        "description": "反擊12點傷害"
+    },
+    {
+        "enemy_id": "BOSS_FIRE",
+        "action_type": "attack",
+        "weight": "40",
+        "value": "1",
+        "cooldown": "0",
+        "description": "普攻"
+    },
+    {
+        "enemy_id": "BOSS_FIRE",
+        "action_type": "burn_stack",
+        "weight": "60",
+        "value": "1",
+        "cooldown": "3",
+        "description": "疊加燃燒並可引爆"
+    },
+    {
+        "enemy_id": "BOSS_WATER",
+        "action_type": "attack",
+        "weight": "50",
+        "value": "1",
+        "cooldown": "0",
+        "description": "普攻"
+    },
+    {
+        "enemy_id": "BOSS_WATER",
+        "action_type": "control",
+        "weight": "50",
+        "value": "1",
+        "cooldown": "3",
+        "description": "凍結"
+    },
+    {
+        "enemy_id": "BOSS_WOOD",
+        "action_type": "attack",
+        "weight": "40",
+        "value": "1",
+        "cooldown": "0",
+        "description": "普攻"
+    },
+    {
+        "enemy_id": "BOSS_WOOD",
+        "action_type": "regen",
+        "weight": "60",
+        "value": "45",
+        "cooldown": "3",
+        "description": "高量回血"
+    },
+    {
+        "enemy_id": "BOSS_METAL",
+        "action_type": "attack",
+        "weight": "30",
+        "value": "1",
+        "cooldown": "0",
+        "description": "普攻"
+    },
+    {
+        "enemy_id": "BOSS_METAL",
+        "action_type": "combo",
+        "weight": "70",
+        "value": "3",
+        "cooldown": "3",
+        "description": "三連斬"
+    },
+    {
+        "enemy_id": "BOSS_EARTH",
+        "action_type": "attack",
+        "weight": "50",
+        "value": "1",
+        "cooldown": "0",
+        "description": "普攻"
+    },
+    {
+        "enemy_id": "BOSS_EARTH",
+        "action_type": "damage_reduce",
+        "weight": "50",
+        "value": "0.25",
+        "cooldown": "4",
+        "description": "減傷25%"
+    }
+]

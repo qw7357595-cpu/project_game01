@@ -1,0 +1,170 @@
+[
+    {
+        "effect_type": "control_chance",
+        "max_value": "0.7",
+        "source_rule": "NORMAL",
+        "note": "一般技能控制成功率上限70%"
+    },
+    {
+        "effect_type": "extra_hit_chance",
+        "max_value": "0.7",
+        "source_rule": "NORMAL",
+        "note": "額外攻擊追加上限70%"
+    },
+    {
+        "effect_type": "re_follow",
+        "max_value": "0.9",
+        "source_rule": "NORMAL",
+        "note": "再追擊率最大90%"
+    },
+    {
+        "effect_type": "follow_rate",
+        "max_value": "0.8",
+        "source_rule": "NORMAL",
+        "note": "一般追擊率封頂80%"
+    },
+    {
+        "effect_type": "shield_percent",
+        "max_value": "0.5",
+        "source_rule": "NORMAL",
+        "note": "護盾最大為最大HP的50%"
+    },
+    {
+        "effect_type": "lifesteal",
+        "max_value": "0.3",
+        "source_rule": "NORMAL",
+        "note": "吸血上限30%"
+    },
+    {
+        "effect_type": "damage_reduce",
+        "max_value": "0.4",
+        "source_rule": "NORMAL",
+        "note": "減傷最多40%"
+    },
+    {
+        "effect_type": "armor_pen",
+        "max_value": "0.5",
+        "source_rule": "NORMAL",
+        "note": "破甲上限50%"
+    },
+    {
+        "effect_type": "crit_rate",
+        "max_value": "0.6",
+        "source_rule": "NORMAL",
+        "note": "暴擊率最多60%"
+    },
+    {
+        "effect_type": "energy_gain",
+        "max_value": "50.0",
+        "source_rule": "NORMAL",
+        "note": "單次回復內力最大50"
+    },
+    {
+        "effect_type": "max_hp_run",
+        "max_value": "1.5",
+        "source_rule": "NORMAL",
+        "note": "冒險期間最大HP成長上限150%"
+    },
+    {
+        "effect_type": "heal_amp",
+        "max_value": "1.5",
+        "source_rule": "NORMAL",
+        "note": "治療效果最多+150%"
+    },
+    {
+        "effect_type": "burn_amp",
+        "max_value": "2.0",
+        "source_rule": "NORMAL",
+        "note": "燃燒傷害最多200%"
+    },
+    {
+        "effect_type": "control_amp",
+        "max_value": "0.7",
+        "source_rule": "NORMAL",
+        "note": "控制效果倍率上限70%"
+    },
+    {
+        "effect_type": "damage_add",
+        "max_value": "400.0",
+        "source_rule": "NORMAL",
+        "note": "純技能傷害最大400"
+    },
+    {
+        "effect_type": "def_buff",
+        "max_value": "1.5",
+        "source_rule": "NORMAL",
+        "note": "防禦加成最多+150%"
+    },
+    {
+        "effect_type": "thorns",
+        "max_value": "0.75",
+        "source_rule": "NORMAL",
+        "note": "反傷最多75%"
+    },
+    {
+        "effect_type": "execute_chance",
+        "max_value": "0.15",
+        "source_rule": "BOSS_ONLY",
+        "note": "斬殺技能最大成功率15%"
+    },
+    {
+        "effect_type": "execute_burn",
+        "max_value": "0.25",
+        "source_rule": "BOSS_ONLY",
+        "note": "Boss百分比傷害上限25%"
+    },
+    {
+        "effect_type": "life_drain_barrier",
+        "max_value": "0.15",
+        "source_rule": "BOSS_ONLY",
+        "note": "吸血轉護盾比例上限15%"
+    },
+    {
+        "effect_type": "damage_immune",
+        "max_value": "1.0",
+        "source_rule": "BOSS_ONLY",
+        "note": "無敵最多1回合"
+    },
+    {
+        "effect_type": "self_damage_cap",
+        "max_value": "0.2",
+        "source_rule": "BOSS_ONLY",
+        "note": "Boss自損最多為最大HP20%"
+    },
+    {
+        "effect_type": "flow_control",
+        "max_value": "0.6",
+        "source_rule": "BOSS_ONLY",
+        "note": "節奏阻斷型技能成功率60%"
+    },
+    {
+        "effect_type": "boss_control",
+        "max_value": "0.5",
+        "source_rule": "BOSS_ONLY",
+        "note": "Boss 控制型效果封頂"
+    },
+    {
+        "effect_type": "boss_shield",
+        "max_value": "0.65",
+        "source_rule": "BOSS_ONLY",
+        "note": "Boss 產生護盾上限（較普通技能略高）"
+    },
+    {
+        "effect_type": "boss_damage_add",
+        "max_value": "800.0",
+        "source_rule": "BOSS_ONLY",
+        "note": "Boss 技能額外傷害可超過一般技能"
+    },
+    {
+        "effect_type": "boss_heal",
+        "max_value": "0.25",
+        "source_rule": "BOSS_ONLY",
+        "note": "Boss 技能回血比例上限"
+    },
+    {
+        "effect_type": "boss_damage_reduce",
+        "max_value": "0.5",
+        "source_rule": "BOSS_ONLY",
+        "note": "Boss 技能最大減傷"
+    }
+]

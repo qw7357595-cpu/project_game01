@@ -1,0 +1,9 @@
+[
+    {
+        "start_floor": "101",
+        "base_level": "55",
+        "floor_growth": "1.1",
+        "level_cap": "0",
+        "description": "100層後線性推高敵等，0=不封頂"
+    }
+]

@@ -1,0 +1,14 @@
+[
+    {
+        "perk_pool": "boss",
+        "min_count": "1",
+        "max_count": "1",
+        "description": "至少 1 個 Boss 專屬天賦"
+    },
+    {
+        "perk_pool": "normal",
+        "min_count": "0",
+        "max_count": "2",
+        "description": "可額外抽 0～2 個一般天賦"
+    }
+]

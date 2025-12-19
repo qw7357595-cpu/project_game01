@@ -1,0 +1,57 @@
+[
+    {
+        "player_level": "1",
+        "max_total_element_points": "6",
+        "description": "新手起始點數"
+    },
+    {
+        "player_level": "5",
+        "max_total_element_points": "10",
+        "description": "初期開始有選擇空間"
+    },
+    {
+        "player_level": "10",
+        "max_total_element_points": "16",
+        "description": "可小幅專精單系"
+    },
+    {
+        "player_level": "15",
+        "max_total_element_points": "22",
+        "description": "開始出現明顯流派"
+    },
+    {
+        "player_level": "20",
+        "max_total_element_points": "27",
+        "description": "中期標準強度"
+    },
+    {
+        "player_level": "25",
+        "max_total_element_points": "32",
+        "description": "雙系開始成形"
+    },
+    {
+        "player_level": "30",
+        "max_total_element_points": "38",
+        "description": "中後期轉折點"
+    },
+    {
+        "player_level": "35",
+        "max_total_element_points": "43",
+        "description": "高階流派完整化"
+    },
+    {
+        "player_level": "40",
+        "max_total_element_points": "49",
+        "description": "後期成長期"
+    },
+    {
+        "player_level": "45",
+        "max_total_element_points": "55",
+        "description": "接近滿等"
+    },
+    {
+        "player_level": "50",
+        "max_total_element_points": "60",
+        "description": "滿等上限"
+    }
+]

@@ -1,0 +1,102 @@
+[
+    {
+        "id": "BOSS_PERK_FIRE_01",
+        "display_name": "焚炎狂息",
+        "element": "fire",
+        "effect_type": "burn_stack_plus",
+        "value": "1",
+        "stack_limit": "1",
+        "trigger": "always",
+        "description": "燃燒可額外疊加 1 層，並使燃燒總傷害提升 15%"
+    },
+    {
+        "id": "BOSS_PERK_FIRE_02",
+        "display_name": "燼滅燒痕",
+        "element": "fire",
+        "effect_type": "explode_on_burn",
+        "value": "0.3",
+        "stack_limit": "1",
+        "trigger": "onBurn",
+        "description": "燃燒結束時引爆，造成剩餘燃燒傷害的 30%"
+    },
+    {
+        "id": "BOSS_PERK_WATER_01",
+        "display_name": "寒極領域",
+        "element": "water",
+        "effect_type": "freeze_extend",
+        "value": "1",
+        "stack_limit": "1",
+        "trigger": "onFreeze",
+        "description": "凍結時延長 1 回合（不可超過 3 回合）"
+    },
+    {
+        "id": "BOSS_PERK_WATER_02",
+        "display_name": "冰華裂息",
+        "element": "water",
+        "effect_type": "damage_on_control",
+        "value": "0.6",
+        "stack_limit": "1",
+        "trigger": "onControl",
+        "description": "控制成功時造成攻擊 60% 的額外水屬性傷害"
+    },
+    {
+        "id": "BOSS_PERK_WOOD_01",
+        "display_name": "萬木同生",
+        "element": "wood",
+        "effect_type": "heal_overflow_shield",
+        "value": "1",
+        "stack_limit": "1",
+        "trigger": "onHeal",
+        "description": "過量治療轉為護盾，上限為最大 HP 的 50%"
+    },
+    {
+        "id": "BOSS_PERK_WOOD_02",
+        "display_name": "寄生根系",
+        "element": "wood",
+        "effect_type": "lifesteal_amp",
+        "value": "0.3",
+        "stack_limit": "1",
+        "trigger": "always",
+        "description": "吸血提升 30%，僅於本關有效"
+    },
+    {
+        "id": "BOSS_PERK_METAL_01",
+        "display_name": "斬境之鋒",
+        "element": "metal",
+        "effect_type": "ignore_def",
+        "value": "0.3",
+        "stack_limit": "1",
+        "trigger": "always",
+        "description": "攻擊無視 30% 防禦（Boss）"
+    },
+    {
+        "id": "BOSS_PERK_METAL_02",
+        "display_name": "無盡連刃",
+        "element": "metal",
+        "effect_type": "follow_reset",
+        "value": "1",
+        "stack_limit": "1",
+        "trigger": "onFollowFail",
+        "description": "追擊失敗時重置判定一次（每次僅觸發一次）"
+    },
+    {
+        "id": "BOSS_PERK_EARTH_01",
+        "display_name": "地脈不朽",
+        "element": "earth",
+        "effect_type": "shield_on_hit",
+        "value": "0.12",
+        "stack_limit": "1",
+        "trigger": "onHit",
+        "description": "命中時獲得傷害 12% 的護盾，上限最大 HP 50%"
+    },
+    {
+        "id": "BOSS_PERK_EARTH_02",
+        "display_name": "巖魂重生",
+        "element": "earth",
+        "effect_type": "resist_death",
+        "value": "1",
+        "stack_limit": "1",
+        "trigger": "onLethal",
+        "description": "首次承受致死傷害時保留 1 HP（每關一次）"
+    }
+]

@@ -1,0 +1,38 @@
+[
+    {
+        "stage_id": "STAGE_1",
+        "start_floor": "1",
+        "unlock_condition": "default",
+        "description": "初始開放"
+    },
+    {
+        "stage_id": "STAGE_2",
+        "start_floor": "21",
+        "unlock_condition": "boss_20_clear",
+        "description": "擊敗第20層Boss"
+    },
+    {
+        "stage_id": "STAGE_3",
+        "start_floor": "41",
+        "unlock_condition": "boss_40_clear",
+        "description": "擊敗第40層Boss"
+    },
+    {
+        "stage_id": "STAGE_4",
+        "start_floor": "61",
+        "unlock_condition": "boss_60_clear",
+        "description": "擊敗第60層Boss"
+    },
+    {
+        "stage_id": "STAGE_5",
+        "start_floor": "81",
+        "unlock_condition": "boss_80_clear",
+        "description": "擊敗第80層Boss"
+    },
+    {
+        "stage_id": "STAGE_ENDLESS",
+        "start_floor": "101",
+        "unlock_condition": "boss_100_clear",
+        "description": "解鎖無盡模式"
+    }
+]

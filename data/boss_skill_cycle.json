@@ -1,0 +1,37 @@
+[
+    {
+        "boss_id": "BOSS_FIRE",
+        "cycle_type": "fixed",
+        "interval": "4",
+        "skill_id": "FIRE_ULT",
+        "description": "每 4 回合釋放焚界火雨"
+    },
+    {
+        "boss_id": "BOSS_WATER",
+        "cycle_type": "fixed",
+        "interval": "5",
+        "skill_id": "WATER_ULT",
+        "description": "每 5 回合施放冰封結界"
+    },
+    {
+        "boss_id": "BOSS_WOOD",
+        "cycle_type": "fixed",
+        "interval": "6",
+        "skill_id": "WOOD_ULT",
+        "description": "每 6 回合發動萬木復甦"
+    },
+    {
+        "boss_id": "BOSS_METAL",
+        "cycle_type": "fixed",
+        "interval": "4",
+        "skill_id": "METAL_ULT",
+        "description": "每 4 回合斬獄連擊"
+    },
+    {
+        "boss_id": "BOSS_EARTH",
+        "cycle_type": "fixed",
+        "interval": "5",
+        "skill_id": "EARTH_ULT",
+        "description": "每 5 回合震地天崩"
+    }
+]

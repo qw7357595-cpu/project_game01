@@ -1,0 +1,17 @@
+[
+    {
+        "rarity": "common",
+        "weight": "70",
+        "description": "普通"
+    },
+    {
+        "rarity": "rare",
+        "weight": "25",
+        "description": "稀有"
+    },
+    {
+        "rarity": "legend",
+        "weight": "5",
+        "description": "傳說"
+    }
+]

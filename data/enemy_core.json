@@ -1,0 +1,145 @@
+[
+    {
+        "id": "NM_FIRE_01",
+        "display_name": "焰息赤狐",
+        "grade": "normal",
+        "element": "fire",
+        "hp_base": "110",
+        "atk_base": "15",
+        "def_base": "4",
+        "speed": "1.2",
+        "description": "火屬性普通怪，高機率燃燒"
+    },
+    {
+        "id": "NM_WATER_01",
+        "display_name": "寒潭水魅",
+        "grade": "normal",
+        "element": "water",
+        "hp_base": "125",
+        "atk_base": "13",
+        "def_base": "4",
+        "speed": "1",
+        "description": "水屬性普通怪，控制型"
+    },
+    {
+        "id": "NM_WOOD_01",
+        "display_name": "青藤妖靈",
+        "grade": "normal",
+        "element": "wood",
+        "hp_base": "165",
+        "atk_base": "11",
+        "def_base": "3",
+        "speed": "0.9",
+        "description": "木屬性普通怪，回復型"
+    },
+    {
+        "id": "NM_METAL_01",
+        "display_name": "鐵牙狼衛",
+        "grade": "normal",
+        "element": "metal",
+        "hp_base": "120",
+        "atk_base": "14",
+        "def_base": "4",
+        "speed": "1.3",
+        "description": "金屬性普通怪，追擊型"
+    },
+    {
+        "id": "NM_EARTH_01",
+        "display_name": "岩甲走屍",
+        "grade": "normal",
+        "element": "earth",
+        "hp_base": "190",
+        "atk_base": "10",
+        "def_base": "6",
+        "speed": "0.7",
+        "description": "土屬性普通怪，高防禦"
+    },
+    {
+        "id": "EL_FIRE_01",
+        "display_name": "炎獄獅將",
+        "grade": "elite",
+        "element": "fire",
+        "hp_base": "200",
+        "atk_base": "30",
+        "def_base": "6",
+        "speed": "1.1",
+        "description": "火屬性菁英，高燃燒"
+    },
+    {
+        "id": "EL_WATER_01",
+        "display_name": "冰魄女妖",
+        "grade": "elite",
+        "element": "water",
+        "hp_base": "230",
+        "atk_base": "24",
+        "def_base": "6",
+        "speed": "1",
+        "description": "水屬性菁英，高控場"
+    },
+    {
+        "id": "EL_WOOD_01",
+        "display_name": "萬壽樹妖",
+        "grade": "elite",
+        "element": "wood",
+        "hp_base": "320",
+        "atk_base": "20",
+        "def_base": "5",
+        "speed": "0.9",
+        "description": "木屬性菁英，高吸血"
+    },
+    {
+        "id": "EL_METAL_01",
+        "display_name": "金甲魁儡",
+        "grade": "elite",
+        "element": "metal",
+        "hp_base": "220",
+        "atk_base": "28",
+        "def_base": "7",
+        "speed": "1.2",
+        "description": "金屬性菁英，連擊"
+    },
+    {
+        "id": "EL_EARTH_01",
+        "display_name": "鎮嶽戰魂",
+        "grade": "elite",
+        "element": "earth",
+        "hp_base": "350",
+        "atk_base": "18",
+        "def_base": "10",
+        "speed": "0.7",
+        "description": "土屬性菁英，反擊坦"
+    },
+    {
+        "id": "BOSS_FIRE",
+        "display_name": "焚天火蛟",
+        "grade": "boss",
+        "element": "fire",
+        "hp_base": "1400",
+        "atk_base": "70",
+        "def_base": "18",
+        "speed": "1.1",
+        "description": "Boss（火）"
+    },
+    {
+        "id": "BOSS_WATER",
+        "display_name": "玄冰妖皇",
+        "grade": "boss",
+        "element": "water",
+        "hp_base": "1600",
+        "atk_base": "60",
+        "def_base": "16",
+        "speed": "0.9",
+        "description": "Boss（冰控）"
+    },
+    {
+        "id": "BOSS_WOOD",
+        "display_name": "古樹聖靈",
+        "grade": "boss",
+        "element": "wood",
+        "hp_base": "2200",
+        "atk_base": "50",
+        "def_base": "15",
+        "speed": "0.8",
+        "description": "Boss（高回血）"
+    }
+]
