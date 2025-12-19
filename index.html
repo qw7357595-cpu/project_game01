@@ -1,0 +1,1227 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>五行地城 ‧ Stage 16.3</title>
+  <style>
+    :root{--bg:#0b1020;--card:#0f172a;--muted:#94a3b8;--line:#243047;--pri:#2563eb;--danger:#b91c1c;--ok:#16a34a}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:#e5e7eb;display:flex;justify-content:center}
+    #app{width:1200px;max-width:100%;padding:16px}
+    .card{background:rgba(15,23,42,.92);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:12px;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+    .row{display:flex;gap:12px;flex-wrap:wrap}
+    .col{flex:1;min-width:280px}
+    h1,h2,h3{margin:0 0 8px}
+    .muted{color:var(--muted);font-size:12px}
+    .pill{display:inline-block;padding:2px 10px;border-radius:999px;background:#111a33;border:1px solid var(--line);font-size:12px;margin-right:6px}
+    .btn{border:1px solid var(--line);background:#111a33;color:#e5e7eb;padding:7px 12px;border-radius:999px;cursor:pointer;font-size:14px}
+    .btn:hover{filter:brightness(1.06)}
+    .btn:disabled{opacity:.45;cursor:not-allowed}
+    .btn-primary{background:var(--pri);border-color:var(--pri)}
+    .btn-danger{background:var(--danger);border-color:var(--danger)}
+    .btn-ok{background:var(--ok);border-color:var(--ok)}
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .panel{display:none}
+    .panel.active{display:block}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+    .item{border:1px solid var(--line);background:#0b142d;border-radius:12px;padding:10px}
+    .name{font-weight:700;margin-bottom:4px}
+    .sub{white-space:pre-wrap;font-size:12px;color:#cbd5e1}
+    .actions{margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    input,select{background:#0b142d;color:#e5e7eb;border:1px solid var(--line);border-radius:12px;padding:7px 10px}
+    #log{max-height:260px;overflow:auto;border:1px solid var(--line);border-radius:12px;padding:8px;background:#071026}
+    #log p{margin:4px 0;white-space:pre-wrap;font-size:13px}
+    .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:#cbd5e1}
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;padding:20px}
+    .modal.show{display:flex}
+    .modal .box{width:520px;max-width:100%;background:#0b142d;border:1px solid var(--line);border-radius:16px;padding:14px}
+    .right{float:right}
+  </style>
+</head>
+<body>
+<div id="app">
+
+  <div class="card">
+    <h1>五行地城 ‧ Stage 16.3（主線一致性＋樓層紀錄）</h1>
+    <div class="muted" id="status">初始化中…</div>
+    <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <span class="pill" id="pName">玩家：-</span>
+      <span class="pill" id="pLevel">等級：-</span>
+      <span class="pill" id="pCopper">銅幣：-</span>
+      <span class="pill" id="pFloor">本次樓層：-</span>
+      <span class="pill" id="pMaxFloor">最高樓層：-</span>
+      <span class="pill" id="pCheckpoint">起始樓層：-</span>
+    </div>
+    <div class="tabs">
+      <button class="btn btn-primary" id="tabMain">主選單</button>
+      <button class="btn" id="tabShop">商店</button>
+      <button class="btn" id="tabInv">倉庫</button>
+      <button class="btn" id="tabSkill">功法 / 五行</button>
+    </div>
+    <div class="muted" style="margin-top:6px">
+      規則：戰鬥/掉落用 <span class="kbd">currentFloor</span>；商店解鎖用 <span class="kbd">maxFloorReached</span>；下次起始用 <span class="kbd">checkpointFloor</span>。
+    </div>
+  </div>
+
+  <div class="panel active" id="panelMain">
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <h2>冒險</h2>
+          <div class="muted">按「開始冒險」後直接進入戰鬥流程（本版不再保留獨立冒險頁）。</div>
+          <div class="actions">
+            <button class="btn btn-primary" id="btnStartAdventure">開始冒險</button>
+            <button class="btn" id="btnRestartAdventure">重新冒險</button>
+            <button class="btn btn-danger" id="btnResetAll">重置存檔</button>
+          </div>
+
+          <div style="height:1px;background:var(--line);margin:10px 0"></div>
+
+          <h3>測試工具</h3>
+          <div class="muted">用於驗證商店解鎖、掉落、流程。不影響你的 JSON。</div>
+          <div class="actions">
+            <button class="btn" id="btnGainCopper">+100 銅幣</button>
+            <button class="btn" id="btnIncMaxFloor">最高樓層 +1</button>
+            <button class="btn" id="btnSetCheckpointToMax">起始樓層=最高樓層</button>
+          </div>
+          <div class="actions">
+            <label class="muted">設定起始樓層：</label>
+            <input id="inpCheckpoint" type="number" min="1" step="1" style="width:120px"/>
+            <button class="btn" id="btnApplyCheckpoint">套用</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>戰鬥</h2>
+          <div class="muted">勝利：currentFloor++，並更新 maxFloorReached/checkpointFloor。失敗：彈窗可「重新冒險」。</div>
+          <div id="battleBox" style="display:none">
+            <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center">
+              <div>
+                <div class="name" id="enemyName">-</div>
+                <div class="muted" id="enemyInfo">-</div>
+              </div>
+              <div>
+                <div class="pill" id="enemyHp">HP -</div>
+                <div class="pill" id="playerHp">HP -</div>
+              </div>
+            </div>
+            <div class="actions" style="margin-top:10px">
+              <button class="btn btn-primary" id="btnAtk">普攻</button>
+              <button class="btn" id="btnDef">防禦</button>
+              <select id="selBattleItem" style="min-width:220px"></select>
+              <button class="btn" id="btnUseItem">使用道具</button>
+              <select id="selBattleSkill" style="min-width:220px"></select>
+              <button class="btn" id="btnUseSkill">施放功法</button>
+              <button class="btn btn-danger" id="btnFlee">撤退</button>
+            </div>
+          </div>
+          <div id="battleHint" class="muted">尚未開始冒險。</div>
+        </div>
+
+      </div>
+
+      <div class="col">
+        <div class="card">
+          <h2>紀錄</h2>
+          <div id="log"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" id="panelShop">
+    <div class="card">
+      <h2>商店</h2>
+      <div class="muted" id="shopHint">以 maxFloorReached 判斷解鎖；購買僅支援銅幣。</div>
+      <div class="actions" style="margin-top:8px">
+        <button class="btn" id="btnShopRefresh">刷新列表</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="grid" id="shopList"></div>
+    </div>
+  </div>
+
+  <div class="panel" id="panelInv">
+    <div class="card">
+      <h2>倉庫</h2>
+      <div class="muted">可排序、可販售（維持「物品右下販售按鈕」）。</div>
+      <div class="actions" style="margin-top:8px">
+        <label class="muted">排序：</label>
+        <select id="selInvSort">
+          <option value="name">名稱</option>
+          <option value="id">ID</option>
+          <option value="qty">數量</option>
+        </select>
+        <button class="btn" id="btnInvRefresh">整理</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="grid" id="invList"></div>
+    </div>
+  </div>
+
+  <div class="panel" id="panelSkill">
+    <div class="card">
+      <h2>功法 / 五行</h2>
+      <div class="muted">本版先確保：列表可顯示、可解鎖（等級/殘卷）、可測試調整玩家等級，並新增五行重置。</div>
+      <div class="actions" style="margin-top:8px">
+        <label class="muted">玩家等級：</label>
+        <input id="inpLevel" type="number" min="1" step="1" style="width:120px"/>
+        <button class="btn" id="btnApplyLevel">套用等級</button>
+        <button class="btn" id="btnResetElements">五行重置</button>
+      </div>
+      <div class="muted" id="elementInfo" style="margin-top:8px">-</div>
+      <div class="actions" style="margin-top:8px;flex-wrap:wrap">
+        <button class="btn" data-ele="fire">火 +1</button>
+        <button class="btn" data-ele="water">水 +1</button>
+        <button class="btn" data-ele="wood">木 +1</button>
+        <button class="btn" data-ele="metal">金 +1</button>
+        <button class="btn" data-ele="earth">土 +1</button>
+      </div>
+    </div>
+    <div class="card">
+      <h3>功法列表</h3>
+      <div class="grid" id="skillList"></div>
+    </div>
+    <div class="card">
+      <h3>已裝備功法（最多 3）</h3>
+      <div class="muted">僅能在非戰鬥中更換。</div>
+      <div class="grid" id="skillEquipped"></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal" id="modalDefeat">
+  <div class="box">
+    <h3>戰鬥失敗</h3>
+    <div class="muted" id="defeatMsg">-</div>
+    <div class="actions" style="margin-top:10px">
+      <button class="btn btn-primary" id="btnModalRestart">重新冒險</button>
+      <button class="btn" id="btnModalClose">關閉</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  const STORAGE_KEY = "wuxing_stage16_3_save_v1";
+
+  const state = {
+    data: {},
+    index: { byId:{}, idToName:{}, nameToId:{}, sellPrice:{} },
+    player: {
+      name: "無名散修",
+      level: 1,
+      hpMax: 220,
+      hp: 220,
+      copper: 0,
+      elementPoints: { fire:0, water:0, wood:0, metal:0, earth:0 },
+      unlockedSkills: {},
+      equippedSkills: [],
+    },
+    inventory: {},
+    progress: { currentFloor:1, maxFloorReached:1, checkpointFloor:1, inBattle:false },
+    battle: null
+  };
+
+  const $ = (id)=>document.getElementById(id);
+
+  function safeNumber(v, def=0){
+    if(v===null||v===undefined||v==="") return def;
+    const n=Number(v);
+    return Number.isFinite(n)?n:def;
+  }
+  function safeText(v, def=""){
+    if(v===null||v===undefined) return def;
+    return String(v);
+  }
+  function log(msg, tags=[]){
+    const box=$("log");
+    const p=document.createElement("p");
+    const prefix=tags.length?tags.map(t=>`[${t}]`).join("")+" ":"";
+    p.textContent=prefix+msg;
+    box.prepend(p);
+  }
+  function clamp(n,min,max){ return Math.max(min, Math.min(max, n)); }
+
+  function showPanel(which){
+    if(state.progress.inBattle && which!=="panelMain"){
+      log("戰鬥中無法切換到其他頁面。", ["FLOW","WARN"]);
+      return;
+    }
+    ["panelMain","panelShop","panelInv","panelSkill"].forEach(id=>{
+      $(id).classList.toggle("active", id===which);
+    });
+  }
+  function setStatus(t){ $("status").textContent=t; }
+
+  function renderHeader(){
+    $("pName").textContent=`玩家：${state.player.name}`;
+    $("pLevel").textContent=`等級：${state.player.level}`;
+    $("pCopper").textContent=`銅幣：${state.player.copper}`;
+    $("pFloor").textContent=`本次樓層：${state.progress.currentFloor}`;
+    $("pMaxFloor").textContent=`最高樓層：${state.progress.maxFloorReached}`;
+    $("pCheckpoint").textContent=`起始樓層：${state.progress.checkpointFloor}`;
+    $("inpCheckpoint").value=state.progress.checkpointFloor;
+    $("inpLevel").value=state.player.level;
+  }
+
+  function saveGame(){
+    const save={
+      player:{
+        name: state.player.name,
+        level: state.player.level,
+        copper: state.player.copper,
+        elementPoints: state.player.elementPoints,
+        unlockedSkills: state.player.unlockedSkills
+      },
+      inventory: state.inventory,
+      progress:{
+        maxFloorReached: state.progress.maxFloorReached,
+        checkpointFloor: state.progress.checkpointFloor
+      }
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(save));
+  }
+  function loadGame(){
+    try{
+      const raw=localStorage.getItem(STORAGE_KEY);
+      if(!raw) return;
+      const s=JSON.parse(raw);
+      if(s?.player){
+        state.player.name=s.player.name ?? state.player.name;
+        state.player.level=safeNumber(s.player.level, state.player.level);
+        state.player.copper=safeNumber(s.player.copper, state.player.copper);
+        if(s.player.elementPoints) state.player.elementPoints={...state.player.elementPoints, ...s.player.elementPoints};
+        if(s.player.unlockedSkills) state.player.unlockedSkills={...s.player.unlockedSkills};
+      }
+      if(s?.inventory && typeof s.inventory==="object") state.inventory={...s.inventory};
+      if(s?.progress){
+        state.progress.maxFloorReached=safeNumber(s.progress.maxFloorReached, state.progress.maxFloorReached);
+        state.progress.checkpointFloor=safeNumber(s.progress.checkpointFloor, state.progress.checkpointFloor);
+      }
+      state.progress.currentFloor=clamp(state.progress.checkpointFloor,1,Math.max(1,state.progress.maxFloorReached));
+    }catch(e){
+      console.warn("loadGame failed", e);
+    }
+  }
+  function resetAll(){
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+  }
+
+  const DEFAULT_TABLES=[
+    "enemy_core","enemy_ai_pattern","enemy_level_scaling","floor_enemy_level_pool","endless_scaling_rule",
+    "drop_rule","currency_drop_rule","item_core","material_core","base_weapon","mid_weapon","high_weapon",
+    "artifact_weapon","armor_sets","jade_core","elemental_accessories","shop_rule","sell_price_rule",
+    "recipe_core","rarity_rule","run_perks","run_reward_rule","run_cap_rule",
+    "skill_core","skill_unlock_rule","skill_drop_rule","boss_skill_cycle",
+    "element_point_cap"
+  ];
+
+  async function fetchJson(name){
+    try{
+      const res=await fetch(`data/${name}.json`, {cache:"no-store"});
+      if(!res.ok) return null;
+      const txt=(await res.text()).replace(/\bNaN\b/g,"null");
+      return JSON.parse(txt);
+    }catch{ return null; }
+  }
+
+  function indexTable(arr, idField, nameField, typeKey){
+    if(!Array.isArray(arr)) return;
+    for(const row of arr){
+      if(!row||typeof row!=="object") continue;
+      const id=row[idField];
+      if(!id) continue;
+      if(typeKey){ row.__type = typeKey; state.index.itemTypeById[id]=typeKey; }
+      state.index.byId[id]=row;
+      const nm=row[nameField] || row.display_name || row.item_name;
+      if(nm) state.index.idToName[id]=nm;
+      state.index.nameToId[id]=id;
+      if(nm && !state.index.nameToId[nm]) state.index.nameToId[nm]=id;
+    }
+  }
+
+  function buildIndexes(){
+    state.index.byId={}; state.index.idToName={}; state.index.nameToId={}; state.index.itemTypeById={}; state.index.sellPrice={}; state.index.sellPriceByCategory={};
+
+    indexTable(state.data.material_core, "material_id", "display_name", "material");
+
+    if(Array.isArray(state.data.item_core)){
+      for(const row of state.data.item_core){
+        if(!row) continue;
+        // Excel 匯出常見差異：item_id / item_name / id / code
+        const id = row.item_id || row.item_name || row.id || row.code;
+        if(!id) continue;
+        state.index.byId[id]=row;
+        // 名稱欄位可能是 display_name / name / item_name / cn_name 等
+        const nm = row.display_name || row.name || row.item_name || row.cn_name || row.zh_name || id;
+        state.index.idToName[id]=nm;
+        state.index.nameToId[id]=id;
+        if(nm && !state.index.nameToId[nm]) state.index.nameToId[nm]=id;
+        if(row.display_name && !state.index.nameToId[row.display_name]) state.index.nameToId[row.display_name]=id;
+        if(row.name && !state.index.nameToId[row.name]) state.index.nameToId[row.name]=id;
+        if(row.item_name && !state.index.nameToId[row.item_name]) state.index.nameToId[row.item_name]=id;
+      }
+    }
+
+    indexTable(state.data.base_weapon, "item_id", "display_name", "weapon");
+    indexTable(state.data.mid_weapon, "item_id", "display_name", "weapon");
+    indexTable(state.data.high_weapon, "item_id", "display_name", "weapon");
+    indexTable(state.data.artifact_weapon, "item_id", "display_name", "weapon");
+    indexTable(state.data.armor_sets, "item_id", "display_name", "armor");
+    indexTable(state.data.jade_core, "item_id", "display_name", "jade");
+    indexTable(state.data.elemental_accessories, "item_id", "display_name", "accessory");
+    // build sell price indices (category-first)
+    const sp = state.data.sell_price_rule;
+    if(Array.isArray(sp)){
+      for(const r of sp){
+        const price = safeNumber(r.sell_price ?? r.price, 0);
+        if(price<=0) continue;
+        const cat = r.category || r.item_category || r.item_type || r.type;
+        const itemId = r.item_id || r.target_item_id;
+        const rarity = r.rarity;
+        if(itemId){
+          state.index.sellPrice[itemId] = price;
+        }else if(cat){
+          const key = String(cat);
+          if(!state.index.sellPriceByCategory[key]) state.index.sellPriceByCategory[key]=price;
+          if(rarity){
+            state.index.sellPrice[`${key}|${String(rarity).toLowerCase()}`]=price;
+          }
+        }else if(rarity){
+          state.index.sellPrice[`rarity|${String(rarity).toLowerCase()}`]=price;
+        }
+      }
+    }
+
+
+    if(Array.isArray(state.data.skill_core)){
+      for(const row of state.data.skill_core){
+        if(!row) continue;
+        let sid=row.skill_id || row.id;
+        if(!sid && row.element && row.tier){
+          const ele=String(row.element).toUpperCase();
+          const tier=String(row.tier).toUpperCase();
+          sid=(tier==="BOSS")?`SK_BOSS_${ele}_ULT`:(tier==="3T")?`SK_${ele}_3T`:`SK_${ele}_${tier}`;
+          row.skill_id=sid;
+        }
+        if(!sid) continue;
+        state.index.byId[sid]=row;
+        const sn = row.display_name || row.skill_name || row.name || row.title || sid;
+        state.index.idToName[sid]=sn;
+        state.index.nameToId[sid]=sid;
+        if(sn && !state.index.nameToId[sn]) state.index.nameToId[sn]=sid;
+      }
+    }
+
+    // sell_price_rule：可能是「逐物品」或「依類別/稀有度」
+    state.index.sellRules = Array.isArray(state.data.sell_price_rule) ? state.data.sell_price_rule.slice() : [];
+    if(Array.isArray(state.data.sell_price_rule)){
+      for(const r of state.data.sell_price_rule){
+        const id = r.target_item_id || r.item_id || r.id;
+        if(!id) continue;
+        state.index.sellPrice[id]=safeNumber(r.price, safeNumber(r.sell_price,0));
+      }
+    }
+  }
+
+  function displayName(id){ return state.index.idToName[id] || id; }
+
+  function addToInventory(id, qty){
+    qty=Math.floor(qty);
+    if(!id||qty<=0) return;
+    state.inventory[id]=(state.inventory[id]||0)+qty;
+  }
+  function removeFromInventory(id, qty){
+    qty=Math.floor(qty);
+    const have=state.inventory[id]||0;
+    if(have<qty) return false;
+    const next=have-qty;
+    if(next<=0) delete state.inventory[id]; else state.inventory[id]=next;
+    return true;
+  }
+  function inferItemType(id, row=null){
+    const s=String(id||"");
+    if(s.startsWith("BW_")||s.startsWith("MW_")||s.startsWith("HW_")||s.startsWith("AR_")) return "weapon";
+    if(s.startsWith("SET_")||s.includes("ARMOR")) return "armor";
+    if(s.startsWith("JADE_")) return "jade";
+    if(s.startsWith("ACC_")) return "acc";
+    if(s.startsWith("MAT_")) return "material";
+    if(s.startsWith("SK_")) return "skill_scroll";
+    const r=row || state.index.byId[id] || {};
+    if(String(r.category).toLowerCase()==="consumable") return "consumable";
+    if(r.effect_type && String(r.effect_type).includes("recover")) return "consumable";
+    return "other";
+  }
+
+  function getSellPrice(id){
+    if(!id) return 0;
+    // per-item
+    if(state.index.sellPrice[id]!==undefined) return safeNumber(state.index.sellPrice[id],0);
+    const row = state.index.byId[id];
+    const nm = row?.display_name || row?.item_name || row?.name;
+    if(nm && state.index.sellPrice[nm]!==undefined) return safeNumber(state.index.sellPrice[nm],0);
+
+    const catRaw = row?.category || row?.item_category || row?.item_type || row?.type || row?.__type || state.index.itemTypeById[id];
+    const cat = catRaw ? String(catRaw) : "";
+    const rarity = String(row?.rarity || row?.item_rarity || row?.grade || "").toLowerCase();
+
+    // category+rarity
+    if(cat && rarity){
+      const k = `${cat}|${rarity}`;
+      if(state.index.sellPrice[k]!==undefined) return safeNumber(state.index.sellPrice[k],0);
+    }
+    // category only
+    if(cat && state.index.sellPriceByCategory[cat]!==undefined) return safeNumber(state.index.sellPriceByCategory[cat],0);
+    if(cat && state.index.sellPrice[cat]!==undefined) return safeNumber(state.index.sellPrice[cat],0);
+
+    // rarity only
+    if(rarity){
+      const rk = `rarity|${rarity}`;
+      if(state.index.sellPrice[rk]!==undefined) return safeNumber(state.index.sellPrice[rk],0);
+    }
+    return 0;
+  }
+
+  function renderInventory(){
+    const box=$("invList"); box.innerHTML="";
+    const keys=Object.keys(state.inventory);
+    if(!keys.length){ box.innerHTML='<div class="muted">倉庫是空的。</div>'; return; }
+    const mode=$("selInvSort").value;
+    const list=keys.map(id=>({id, qty:state.inventory[id], name:displayName(id)}));
+    if(mode==="name") list.sort((a,b)=>a.name.localeCompare(b.name,"zh-Hant"));
+    if(mode==="id") list.sort((a,b)=>a.id.localeCompare(b.id));
+    if(mode==="qty") list.sort((a,b)=>b.qty-a.qty || a.name.localeCompare(b.name,"zh-Hant"));
+    for(const it of list){
+      const card=document.createElement("div"); card.className="item";
+      const nm=document.createElement("div"); nm.className="name"; nm.textContent=it.name;
+      const sub=document.createElement("div"); sub.className="sub";
+      const price=getSellPrice(it.id);
+      sub.textContent=`ID: ${it.id}\n數量: ${it.qty}\n售價(單價): ${price}`;
+      const actions=document.createElement("div"); actions.className="actions";
+
+      // 裝備（僅針對裝備類）
+      const slot = inferItemType(it.id);
+      if(["weapon","armor","jade","acc"].includes(slot)){
+        const eqBtn=document.createElement("button");
+        eqBtn.className="btn";
+        eqBtn.textContent="裝備";
+        eqBtn.onclick=()=>{
+          state.player.equipment[slot]=it.id;
+          saveGame();
+          renderHeader();
+          log(`已裝備：${displayName(it.id)}（${slot}）`,["EQUIP"]);
+        };
+        actions.appendChild(eqBtn);
+      }
+      const sellBtn=document.createElement("button");
+      sellBtn.className="btn btn-danger";
+      sellBtn.textContent="販售";
+      sellBtn.onclick=()=>openSellDialog(it.id);
+      actions.appendChild(sellBtn);
+      card.appendChild(nm); card.appendChild(sub); card.appendChild(actions);
+      box.appendChild(card);
+    }
+  }
+
+  function openSellDialog(id){
+    const price=getSellPrice(id);
+    const have=state.inventory[id]||0;
+    if(price<=0){ alert("此物品售價為 0（請檢查 sell_price_rule.json）。"); return; }
+    const qty=prompt(`販售 ${displayName(id)}\n持有：${have}\n單價：${price}\n輸入販售數量：`, "1");
+    if(qty===null) return;
+    const q=Math.floor(Number(qty));
+    if(!Number.isFinite(q)||q<=0) return;
+    if(q>have){ alert("數量不足"); return; }
+    removeFromInventory(id,q);
+    state.player.copper += price*q;
+    saveGame();
+    renderHeader(); renderInventory(); renderShop();
+    log(`販售：${displayName(id)} x${q}，獲得 ${price*q} 銅幣`, ["INV","SELL"]);
+  }
+
+  function resolveShopTarget(row){
+    let id=row.target_item_id || row.targetId || row.item_name || row.item_id;
+    if(!id) return null;
+    id=String(id).trim();
+    if(!id) return null;
+    if(state.index.byId[id]) return id;
+    if(state.index.nameToId[id]) return state.index.nameToId[id];
+    return id;
+  }
+  function normalizeCurrency(cur){
+    if(!cur) return "CURRENCY_COPPER";
+    const c=String(cur).trim();
+    if(c==="銅幣") return "CURRENCY_COPPER";
+    return c;
+  }
+
+  function renderShop(){
+    const box=$("shopList"); box.innerHTML="";
+    const shop=state.data.shop_rule;
+    if(!Array.isArray(shop)||!shop.length){ box.innerHTML='<div class="muted">未載入 shop_rule.json 或內容為空。</div>'; return; }
+    const maxF=state.progress.maxFloorReached;
+    let unknown=0;
+    for(const r of shop){
+      const shopId=r.item_id || r.shop_id || "-";
+      const targetId=resolveShopTarget(r);
+      const unlockF=safeNumber(r.unlock_floor, safeNumber(r.min_floor,1));
+      const price=safeNumber(r.price,0);
+      const currency=normalizeCurrency(r.currency);
+      const unlocked = maxF >= unlockF;
+
+      const card=document.createElement("div"); card.className="item";
+      const nm=document.createElement("div"); nm.className="name";
+      nm.textContent = targetId ? displayName(targetId) : (r.item_name||r.item_id||"(未知商品)");
+      const sub=document.createElement("div"); sub.className="sub";
+      if(!targetId) unknown++;
+
+      sub.textContent =
+        `shop_id: ${shopId}\n`+
+        `target_item_id: ${r.target_item_id||"(缺)"}\n`+
+        `解鎖樓層: ${unlockF}（${unlocked?"已解鎖":"尚未解鎖"}；以最高樓層 ${maxF} 判斷）\n`+
+        `價格: ${price}（${currency==="CURRENCY_COPPER"?"銅幣":currency}）\n`+
+        (targetId?"":"⚠ 無法解析到核心物品 ID（請檢查 target_item_id / 名稱對應）");
+
+      const actions=document.createElement("div"); actions.className="actions";
+      const btn=document.createElement("button"); btn.className="btn btn-primary"; btn.textContent="購買";
+
+      let reason="";
+      if(!targetId) reason="無法解析物品";
+      else if(!unlocked) reason="未解鎖";
+      else if(currency!=="CURRENCY_COPPER") reason="僅支援銅幣";
+      else if(price<=0) reason="價格異常";
+      else if(state.player.copper<price) reason="銅幣不足";
+
+      btn.disabled=!!reason;
+      btn.title=reason||"";
+      btn.onclick=()=>{
+        if(btn.disabled) return;
+        state.player.copper -= price;
+        addToInventory(targetId,1);
+        saveGame();
+        renderHeader(); renderInventory(); renderShop();
+        log(`購買：${displayName(targetId)} -${price} 銅幣`, ["SHOP"]);
+      };
+
+      actions.appendChild(btn);
+      card.appendChild(nm); card.appendChild(sub); card.appendChild(actions);
+      box.appendChild(card);
+    }
+    $("shopHint").textContent = unknown
+      ? `提示：有 ${unknown} 個商品無法解析到核心物品 ID。商店解鎖以最高樓層 ${state.progress.maxFloorReached} 判斷。`
+      : `商店解鎖以最高樓層 ${state.progress.maxFloorReached} 判斷；購買僅支援銅幣。`;
+  }
+
+  function getElementCapForLevel(level){
+    const t=state.data.element_point_cap;
+    if(!Array.isArray(t)||!t.length) return 6;
+    const pts=t.map(r=>({lvl:safeNumber(r.player_level,1), cap:safeNumber(r.max_total_element_points,6)}))
+               .sort((a,b)=>a.lvl-b.lvl);
+    let cap=pts[0].cap;
+    for(const p of pts){ if(p.lvl<=level) cap=p.cap; else break; }
+    return cap;
+  }
+  function totalElementPoints(){
+    const e=state.player.elementPoints;
+    return e.fire+e.water+e.wood+e.metal+e.earth;
+  }
+  function renderElements(){
+    const cap=getElementCapForLevel(state.player.level);
+    const total=totalElementPoints();
+    const e=state.player.elementPoints;
+    $("elementInfo").textContent=`五行點數：火${e.fire} 水${e.water} 木${e.wood} 金${e.metal} 土${e.earth}（總計 ${total}/${cap}）`;
+  }
+
+  function canUnlockSkill(skillId,row){
+    const tier=String(row?.tier||"").toUpperCase();
+    if(tier==="1"||tier==="2"||tier==="3"){
+      let need=(tier==="1")?1:(tier==="2")?10:20;
+      const rules=state.data.skill_unlock_rule;
+      if(Array.isArray(rules)){
+        const rr=rules.find(x=>x.skill_id===skillId);
+        if(rr) need=safeNumber(rr.unlock_level, need);
+      }
+      if(state.player.level<need) return {ok:false, reason:`等級不足（需 Lv.${need}）`};
+      return {ok:true, reason:""};
+    }
+    if(tier==="3T"){
+      const have=state.inventory["MAT_SCROLL_FRAGMENT"]||0;
+      if(have<3) return {ok:false, reason:`殘卷不足（需 3；持有 ${have}）`};
+      return {ok:true, reason:"消耗殘卷解鎖"};
+    }
+    if(tier==="BOSS"){
+      const have=state.inventory[skillId]||0;
+      if(have<1) return {ok:false, reason:"需 Boss 功法卷（掉落物）"};
+      return {ok:true, reason:"消耗 Boss 功法卷解鎖"};
+    }
+    return {ok:false, reason:"未知 tier"};
+  }
+
+  function unlockSkill(skillId){
+    const row=state.index.byId[skillId];
+    if(!row) return;
+    if(state.player.unlockedSkills[skillId]) return;
+    const chk=canUnlockSkill(skillId,row);
+    if(!chk.ok){ alert(chk.reason); return; }
+    const tier=String(row.tier||"").toUpperCase();
+    if(tier==="3T") removeFromInventory("MAT_SCROLL_FRAGMENT",3);
+    if(tier==="BOSS") removeFromInventory(skillId,1);
+    state.player.unlockedSkills[skillId]=true;
+    saveGame();
+    renderInventory(); renderSkills();
+    log(`解鎖功法：${displayName(skillId)} (${skillId})`, ["SKILL"]);
+  }
+
+  function toggleEquipSkill(skillId){
+    if(!skillId) return;
+    if(state.run.inBattle){
+      alert("戰鬥中不可更換功法。");
+      return;
+    }
+    if(!state.player.unlockedSkills[skillId]){
+      alert("尚未解鎖此功法。");
+      return;
+    }
+    const arr = state.player.equippedSkills || (state.player.equippedSkills=[]);
+    const idx = arr.indexOf(skillId);
+    if(idx>=0){
+      arr.splice(idx,1);
+    }else{
+      if(arr.length>=MAX_SKILL_EQUIP){
+        alert(`最多只能裝備 ${MAX_SKILL_EQUIP} 招功法。`);
+        return;
+      }
+      arr.push(skillId);
+    }
+    saveGame();
+    renderSkills();
+    updateBattleSelectors();
+  }
+
+  function renderSkills(){
+    const box=$("skillList"), eqBox=$("skillEquipped");
+    box.innerHTML=""; if(eqBox) eqBox.innerHTML="";
+    const arr=Array.isArray(state.data.skill_core)?state.data.skill_core:[];
+    if(!arr.length){ box.innerHTML='<div class="muted">未載入 skill_core.json 或內容為空。</div>'; if(eqBox) eqBox.innerHTML='<div class="muted">-</div>'; return; }
+
+    // equipped list
+    if(eqBox){
+      const eq = state.player.equippedSkills||[];
+      if(eq.length===0){
+        eqBox.innerHTML = '<div class="muted">尚未裝備任何功法。</div>';
+      }else{
+        for(const sid of eq){
+          const card=document.createElement("div"); card.className="item";
+          const nm=document.createElement("div"); nm.className="name"; nm.textContent=displayName(sid);
+          const sub=document.createElement("div"); sub.className="sub"; sub.textContent=sid;
+          const actions=document.createElement("div"); actions.className="actions";
+          const btn=document.createElement("button"); btn.className="btn"; btn.textContent="卸下";
+          btn.disabled = state.run.inBattle;
+          btn.onclick=()=>toggleEquipSkill(sid);
+          actions.appendChild(btn);
+          card.appendChild(nm); card.appendChild(sub); card.appendChild(actions);
+          eqBox.appendChild(card);
+        }
+      }
+    }
+
+    // skill list sorted by element/tier
+    const tierOrder={"1":1,"2":2,"3":3,"3T":4,"BOSS":5};
+    const skills = arr.filter(r=>r&&r.display_name).map(r=>{
+      const sid = r.skill_id || r.id || r.skillId;
+      return {...r, __sid:sid};
+    }).filter(r=>r.__sid);
+
+    skills.sort((a,b)=>{
+      const ea=String(a.element||""); const eb=String(b.element||"");
+      if(ea!==eb) return ea.localeCompare(eb);
+      const ta=tierOrder[String(a.tier||"").toUpperCase()]||99;
+      const tb=tierOrder[String(b.tier||"").toUpperCase()]||99;
+      return ta-tb;
+    });
+
+    for(const r of skills){
+      const sid=r.__sid;
+      const unlocked=!!state.player.unlockedSkills[sid];
+      const equipped=(state.player.equippedSkills||[]).includes(sid);
+      const req = skillUnlockRequirement(sid);
+
+      const card=document.createElement("div"); card.className="item";
+      const nm=document.createElement("div"); nm.className="name"; nm.textContent=`${r.display_name}`;
+      const sub=document.createElement("div"); sub.className="sub";
+      const desc = r.description || r.desc || "";
+      sub.textContent =
+        `ID: ${sid}\n`+
+        `屬性: ${r.element||"-"} Tier: ${r.tier||"-"}\n`+
+        `效果: ${r.effect_type||"-"} 值: ${r.value??"-"}\n`+
+        (desc?`描述: ${desc}\n`:"")+
+        (unlocked ? (equipped? "狀態: 已解鎖 / 已裝備":"狀態: 已解鎖") : `狀態: 未解鎖（${req.ok? "可解鎖" : req.reason}）`);
+
+      const actions=document.createElement("div"); actions.className="actions";
+      if(!unlocked){
+        const btn=document.createElement("button"); btn.className="btn btn-primary"; btn.textContent="解鎖";
+        btn.disabled = !req.ok;
+        btn.onclick=()=>unlockSkill(sid);
+        actions.appendChild(btn);
+      }else{
+        const btn=document.createElement("button"); btn.className=equipped?"btn":"btn btn-primary";
+        btn.textContent = equipped ? "卸下" : "裝備";
+        btn.disabled = state.run.inBattle;
+        btn.onclick=()=>toggleEquipSkill(sid);
+        actions.appendChild(btn);
+      }
+
+      card.appendChild(nm); card.appendChild(sub); card.appendChild(actions);
+      box.appendChild(card);
+    }
+  }
+
+  function pickFromTable(tableName){
+    const arr=state.data[tableName];
+    if(!Array.isArray(arr)||!arr.length) return null;
+    const row=arr[Math.floor(Math.random()*arr.length)];
+    return row?.item_id || row?.material_id || row?.id || null;
+  }
+  function resolveDropTarget(targetId,targetType){
+    if(!targetId) return null;
+    const tid=String(targetId).trim();
+    if(!tid) return null;
+    if(state.index.byId[tid]) return tid;
+    if(state.index.nameToId[tid]) return state.index.nameToId[tid];
+
+    const token=tid.toLowerCase();
+    const map={
+      "armor":"armor_sets","armor_sets":"armor_sets",
+      "base_weapon":"base_weapon","mid_weapon":"mid_weapon","high_weapon":"high_weapon","artifact_weapon":"artifact_weapon",
+      "jade":"jade_core","jade_core":"jade_core",
+      "accessory":"elemental_accessories","elemental_accessories":"elemental_accessories",
+      "material":"material_core"
+    };
+    if(map[token]) return pickFromTable(map[token]);
+
+    const tt=String(targetType||"").toLowerCase();
+    if(tt.includes("armor")) return pickFromTable("armor_sets");
+    if(tt.includes("weapon")) return pickFromTable("base_weapon");
+    if(tt.includes("jade")) return pickFromTable("jade_core");
+    return tid;
+  }
+  function safeParseChance(v){
+    if(v===null||v===undefined) return 0;
+    if(typeof v==="string"){
+      const t=v.trim();
+      if(t.endsWith("%")){
+        const n=parseFloat(t.slice(0,-1));
+        return Number.isFinite(n)?n/100:0;
+      }
+    }
+    const n=Number(v);
+    if(!Number.isFinite(n)) return 0;
+    return n>1?n/100:n;
+  }
+  function rollDropsForEnemy(floor){
+    const rules=Array.isArray(state.data.drop_rule)?state.data.drop_rule:[];
+    const applicable=rules.filter(r=>{
+      const minF=safeNumber(r.min_floor,1), maxF=safeNumber(r.max_floor,999999);
+      return floor>=minF && floor<=maxF;
+    });
+    if(!applicable.length) return [];
+    const drops=[];
+    for(const r of applicable){
+      const ch=safeParseChance(r.drop_chance ?? r.chance ?? r.dropChance);
+      if(ch<=0) continue;
+      const eff=Math.min(0.95, ch*5);
+      if(Math.random()<eff){
+        const mn=safeNumber(r.min_qty,1), mx=safeNumber(r.max_qty,1);
+        const qty=Math.max(1, Math.floor(Math.random()*(mx-mn+1))+mn);
+        const resolved=resolveDropTarget(r.target_id, r.target_type);
+        if(resolved) drops.push({id:resolved, qty});
+      }
+    }
+    if(!drops.length){
+      const r=applicable[Math.floor(Math.random()*applicable.length)];
+      const qty=Math.max(1,safeNumber(r.min_qty,1));
+      const resolved=resolveDropTarget(r.target_id, r.target_type);
+      if(resolved) drops.push({id:resolved, qty, pity:true});
+    }
+    return drops;
+  }
+  function rollCopper(floor){
+    const t=Array.isArray(state.data.currency_drop_rule)?state.data.currency_drop_rule:[];
+    let gained=0;
+    for(const r of t){
+      const minF=safeNumber(r.min_floor,1), maxF=safeNumber(r.max_floor,999999);
+      if(floor<minF||floor>maxF) continue;
+      if((r.target_id||"")!=="CURRENCY_COPPER") continue;
+      const mn=safeNumber(r.min_qty,0), mx=safeNumber(r.max_qty,0);
+      const qty=(mx>=mn)?Math.floor(Math.random()*(mx-mn+1))+mn:mn;
+      gained += Math.max(0,qty);
+    }
+    return gained;
+  }
+
+  function makeEnemy(floor){
+    const pool=Array.isArray(state.data.enemy_core)?state.data.enemy_core:[];
+    if(pool.length){
+      const e=pool[Math.floor(Math.random()*pool.length)];
+      const hp=Math.floor(safeNumber(e.hp_base,120)*(1+(floor-1)*0.08));
+      const atk=Math.floor(safeNumber(e.atk_base,18)*(1+(floor-1)*0.06));
+      return {name:e.display_name||e.id||"敵人", hp, hpMax:hp, atk};
+    }
+    const hp=Math.floor(120*(1+(floor-1)*0.08));
+    const atk=Math.floor(18*(1+(floor-1)*0.06));
+    return {name:"未知敵人", hp, hpMax:hp, atk};
+  }
+  function playerAtkValue(){
+    let atk = 28 + state.player.level*3 + Math.floor(totalElementPoints()*0.6);
+    const wId = state.player.equipment?.weapon;
+    const w = wId ? state.index.byId[wId] : null;
+    if(w){
+      const amin = safeNumber(w.atk_min, safeNumber(w.atk,0));
+      const amax = safeNumber(w.atk_max, amin);
+      atk += Math.floor((amin+amax)/2);
+    }
+    return atk;
+  }
+  function playerDefValue(){
+    let def = 6 + state.player.level*1.1;
+    const aId = state.player.equipment?.armor;
+    const a = aId ? state.index.byId[aId] : null;
+    if(a) def += safeNumber(a.def_flat, safeNumber(a.def,0));
+    return def;
+  }
+
+  function lockTabs(inBattle){
+    $("tabShop").disabled=inBattle;
+    $("tabInv").disabled=inBattle;
+    $("tabSkill").disabled=inBattle;
+  }
+  function renderBattle(){
+    const b=state.battle; if(!b) return;
+    $("enemyName").textContent=b.enemy.name;
+    $("enemyInfo").textContent=`第 ${b.floor} 層 | 回合 ${b.turn}`;
+    $("enemyHp").textContent=`敵 HP ${b.enemy.hp}/${b.enemy.hpMax}`;
+    $("playerHp").textContent=`我 HP ${state.player.hp}/${state.player.hpMax}`;
+    updateBattleSelectors();
+  }
+
+  function isBattleConsumable(id){
+    const row = state.index.byId[id];
+    if(!row) return false;
+    // exclude anything equippable
+    const slot = inferItemType(id); if(["weapon","armor","jade","acc"].includes(slot)) return false;
+    const cat = String(row.category||row.item_category||row.type||row.__type||"").toLowerCase();
+    const eff = String(row.effect_type||row.effect||"").toLowerCase();
+    // allowlist by category keywords (丹藥/符咒/消耗)
+    if(cat.includes("consum") || cat.includes("potion") || cat.includes("pill") || cat.includes("talisman") || cat.includes("丹") || cat.includes("符")) return true;
+    // allowlist by effect keywords
+    if(eff.includes("recover") || eff.includes("heal") || eff.includes("hp") || eff.includes("mp") || eff.includes("energy") || eff.includes("shield") || eff.includes("remove")) return true;
+    // common ids
+    if(id.startsWith("ITEM_HP") || id.startsWith("ITEM_MP") || id.startsWith("POTION_") || id.startsWith("PILL_")) return true;
+    return false;
+  }
+
+  function updateBattleSelectors(){
+    const selI = $("selBattleItem");
+    if(selI){
+      selI.innerHTML = "";
+      const opt0 = document.createElement("option");
+      opt0.value = "";
+      opt0.textContent = "（選擇道具）";
+      selI.appendChild(opt0);
+
+      const entries = Object.entries(state.inventory)
+        .map(([id,qty])=>({id, qty}))
+        .filter(x=>x.qty>0 && isBattleConsumable(x.id))
+        .sort((a,b)=>displayName(a.id).localeCompare(displayName(b.id)));
+
+      for(const it of entries){
+        const opt = document.createElement("option");
+        opt.value = it.id;
+        opt.textContent = `${displayName(it.id)} ×${it.qty}`;
+        selI.appendChild(opt);
+      }
+    }
+
+    const selS = $("selBattleSkill");
+    if(selS){
+      selS.innerHTML = "";
+      const opt0 = document.createElement("option");
+      opt0.value = "";
+      opt0.textContent = "（選擇功法）";
+      selS.appendChild(opt0);
+
+      for(const sid of (state.player.equippedSkills||[])){
+        const opt = document.createElement("option");
+        opt.value = sid;
+        opt.textContent = displayName(sid);
+        selS.appendChild(opt);
+      }
+    }
+  }
+
+  function applyBattleItem(itemId){
+    const row = state.index.byId[itemId];
+    if(!row) return {ok:false, msg:"找不到道具資料"};
+    if(haveQty(itemId)<1) return {ok:false, msg:"數量不足"};
+    removeFromInventory(itemId,1);
+    const eff = String(row.effect_type||"");
+    const val = safeNumber(row.value, 0);
+    if(eff==="hp_recover_flat"){
+      state.player.hp = Math.min(state.player.hpMax, state.player.hp + val);
+      return {ok:true, msg:`回復 HP +${val}`};
+    }
+    if(eff==="energy_recover_flat"){
+      state.player.mp = Math.min(state.player.mpMax, state.player.mp + val);
+      return {ok:true, msg:`回復 MP +${val}`};
+    }
+    // 其他效果：測試版先記錄
+    return {ok:true, msg:`使用成功（未完整實作：${eff||"unknown"}）`};
+  }
+
+  function castBattleSkill(skillId){
+    const row = state.index.byId[skillId];
+    if(!row) return {ok:false, msg:"找不到功法資料"};
+    const mpCost = safeNumber(row.mp_cost, 18);
+    if(state.player.mp < mpCost) return {ok:false, msg:"MP 不足"};
+    state.player.mp -= mpCost;
+    const eff = String(row.effect_type||"");
+    const base = safeNumber(row.value, 0);
+    const ele = String(row.element||"");
+    const mult = 1 + (safeNumber(state.player.elementPoints?.[ele] ,0) * 0.05);
+    const scaled = base * mult;
+    const b = state.battle;
+    if(!b) return {ok:false, msg:"非戰鬥中"};
+
+    if(eff==="damage" || eff==="damage_mul"){
+      const dmg = Math.max(1, Math.floor(playerAtkValue() * 0.25 * Math.max(1, scaled)));
+      b.enemy.hp = Math.max(0, safeNumber(b.enemy.hp,0) - dmg);
+      return {ok:true, msg:`造成 ${dmg} 傷害（${ele||"-"} x${mult.toFixed(2)}）`};
+    }
+    if(eff==="heal" || eff==="heal_amp"){
+      const heal = Math.max(1, Math.floor(state.player.hpMax * Math.max(0, scaled)));
+      state.player.hp = Math.min(state.player.hpMax, state.player.hp + heal);
+      return {ok:true, msg:`回復 ${heal} HP（${ele||"-"} x${mult.toFixed(2)}）`};
+    }
+    return {ok:true, msg:`施放成功（未完整實作：${eff||"unknown"}）`};
+  }
+
+  function startAdventure(){
+    state.progress.inBattle=true;
+    state.progress.currentFloor=clamp(state.progress.checkpointFloor,1,999999);
+    state.player.hp=state.player.hpMax;
+    state.battle={floor:state.progress.currentFloor, enemy:makeEnemy(state.progress.currentFloor), defend:false, turn:1};
+    $("battleBox").style.display="block";
+    $("battleHint").textContent="";
+    renderHeader(); renderBattle();
+    lockTabs(true);
+    log(`開始冒險：從第 ${state.progress.currentFloor} 層出發。`, ["RUN"]);
+  }
+  function restartAdventure(){
+    state.progress.inBattle=false;
+    state.battle=null;
+    $("battleBox").style.display="none";
+    $("battleHint").textContent="尚未開始冒險。";
+    lockTabs(false);
+    startAdventure();
+  }
+
+  function nextFloor(){
+    state.progress.currentFloor += 1;
+    state.progress.maxFloorReached = Math.max(state.progress.maxFloorReached, state.progress.currentFloor);
+    state.progress.checkpointFloor = Math.max(state.progress.checkpointFloor, state.progress.currentFloor);
+    state.battle.floor = state.progress.currentFloor;
+    state.battle.enemy = makeEnemy(state.progress.currentFloor);
+    state.battle.defend=false;
+    state.battle.turn=1;
+    saveGame();
+    renderHeader(); renderBattle(); renderShop();
+  }
+
+  function winBattle(){
+    const floor=state.progress.currentFloor;
+    const drops=rollDropsForEnemy(floor);
+    const copper=rollCopper(floor);
+    if(copper>0) state.player.copper += copper;
+    for(const d of drops){
+      addToInventory(d.id, d.qty);
+      log(`掉落：${displayName(d.id)} (${d.id}) x${d.qty}${d.pity?"（保底）":""}`, ["DROP"]);
+    }
+    if(copper>0) log(`獲得銅幣：+${copper}`, ["DROP"]);
+    saveGame();
+    renderHeader(); renderInventory();
+    log(`通關第 ${floor} 層，前往下一層。`, ["RUN"]);
+    nextFloor();
+  }
+
+  function defeatBattle(reason){
+    state.progress.inBattle=false;
+    lockTabs(false);
+    $("modalDefeat").classList.add("show");
+    $("defeatMsg").textContent=reason || "你已被擊敗。";
+    saveGame();
+  }
+
+  function enemyTurn(){
+    const b=state.battle; if(!b) return;
+    const def=playerDefValue();
+    const base=Math.max(1, Math.floor(b.enemy.atk - def*0.35));
+    const dmg=b.defend ? Math.max(1, Math.floor(base*0.6)) : base;
+    state.player.hp=Math.max(0, state.player.hp-dmg);
+    b.defend=false;
+    b.turn += 1;
+    log(`敵人攻擊，造成 ${dmg} 傷害。`, ["BATTLE"]);
+    renderBattle(); renderHeader();
+    if(state.player.hp<=0){
+      $("battleBox").style.display="none";
+      $("battleHint").textContent="戰鬥失敗。";
+      defeatBattle(`你在第 ${state.progress.currentFloor} 層戰敗。`);
+    }
+  }
+  function playerAttack(){
+    const b=state.battle; if(!b) return;
+    const atk=playerAtkValue();
+    const dmg=Math.max(1, Math.floor(atk*0.55));
+    b.enemy.hp=Math.max(0, b.enemy.hp-dmg);
+    log(`你造成 ${dmg} 傷害。`, ["BATTLE"]);
+    if(b.enemy.hp<=0){ winBattle(); return; }
+    enemyTurn();
+  }
+  function playerDefend(){
+    const b=state.battle; if(!b) return;
+    b.defend=true;
+    log("你進入防禦姿態。", ["BATTLE"]);
+    enemyTurn();
+  }
+  function flee(){
+    if(!state.battle) return;
+    log("你選擇撤退。本次冒險結束。", ["RUN","WARN"]);
+    state.progress.inBattle=false;
+    state.battle=null;
+    $("battleBox").style.display="none";
+    $("battleHint").textContent="尚未開始冒險。";
+    lockTabs(false);
+    saveGame();
+  }
+
+  async function initData(){
+    setStatus("讀取資料表中…");
+    const loaded={}; let ok=0, miss=0;
+    const indexList=await fetchJson("index");
+    const tables=Array.isArray(indexList)?indexList:DEFAULT_TABLES;
+    for(const name of tables){
+      const j=await fetchJson(name);
+      if(j!==null){ loaded[name]=j; ok++; } else { miss++; }
+    }
+    state.data=loaded;
+    buildIndexes();
+    setStatus(`資料載入完成（成功 ${ok} / 失敗 ${miss}）。若某功能缺資料，請開 Console 檢查 404。`);
+    log(`資料載入：成功 ${ok}，失敗 ${miss}。`, ["SYSTEM"]);
+  }
+
+  function wireEvents(){
+    $("tabMain").onclick=()=>showPanel("panelMain");
+    $("tabShop").onclick=()=>{ showPanel("panelShop"); renderShop(); };
+    $("tabInv").onclick=()=>{ showPanel("panelInv"); renderInventory(); };
+    $("tabSkill").onclick=()=>{ showPanel("panelSkill"); renderElements(); renderSkills(); };
+
+    $("btnStartAdventure").onclick=()=>startAdventure();
+    $("btnRestartAdventure").onclick=()=>restartAdventure();
+    $("btnResetAll").onclick=()=>{ if(confirm("確定重置存檔？")) resetAll(); };
+
+    $("btnGainCopper").onclick=()=>{
+      state.player.copper += 100;
+      saveGame();
+      renderHeader(); renderShop();
+      log("測試：+100 銅幣", ["TEST"]);
+    };
+    $("btnIncMaxFloor").onclick=()=>{
+      state.progress.maxFloorReached += 1;
+      state.progress.maxFloorReached = Math.max(state.progress.maxFloorReached, state.progress.checkpointFloor);
+      saveGame();
+      renderHeader(); renderShop();
+      log(`測試：最高樓層 +1（現在 ${state.progress.maxFloorReached}）`, ["TEST"]);
+    };
+    $("btnSetCheckpointToMax").onclick=()=>{
+      state.progress.checkpointFloor = state.progress.maxFloorReached;
+      saveGame();
+      renderHeader();
+      log(`測試：起始樓層設定為最高樓層 ${state.progress.checkpointFloor}`, ["TEST"]);
+    };
+    $("btnApplyCheckpoint").onclick=()=>{
+      const v=clamp(Math.floor(Number($("inpCheckpoint").value||1)),1,Math.max(1,state.progress.maxFloorReached));
+      state.progress.checkpointFloor=v;
+      saveGame();
+      renderHeader();
+      log(`設定起始樓層：${v}`, ["TEST"]);
+    };
+
+    $("btnShopRefresh").onclick=()=>renderShop();
+    $("btnInvRefresh").onclick=()=>renderInventory();
+
+    $("btnApplyLevel").onclick=()=>{
+      const v=clamp(Math.floor(Number($("inpLevel").value||1)),1,9999);
+      state.player.level=v;
+      saveGame();
+      renderHeader(); renderElements(); renderSkills();
+      log(`測試：設定玩家等級為 Lv.${v}`, ["TEST"]);
+    };
+    $("btnResetElements").onclick=()=>{
+      state.player.elementPoints={fire:0,water:0,wood:0,metal:0,earth:0};
+      saveGame();
+      renderElements(); renderHeader();
+      log("五行點數已重置。", ["TEST"]);
+    };
+    document.querySelectorAll("[data-ele]").forEach(btn=>{
+      btn.onclick=()=>{
+        const ele=btn.getAttribute("data-ele");
+        const cap=getElementCapForLevel(state.player.level);
+        if(totalElementPoints()>=cap){ alert("已達到五行點數上限"); return; }
+        state.player.elementPoints[ele]+=1;
+        saveGame();
+        renderElements(); renderHeader();
+      };
+    });
+
+    $("btnAtk").onclick=()=>{ playerAttack(); renderBattle(); };
+    $("btnDef").onclick=()=>{ playerDefend(); renderBattle(); };
+    $("btnUseItem").onclick=()=>{ useSelectedItem(); renderBattle(); renderInventory(); renderHeader(); };
+    $("btnUseSkill").onclick=()=>{ useSelectedSkill(); renderBattle(); renderHeader(); };
+    $("btnFlee").onclick=()=>{ flee(); renderHeader(); };
+
+    $("btnModalRestart").onclick=()=>{
+      $("modalDefeat").classList.remove("show");
+      restartAdventure();
+    };
+    $("btnModalClose").onclick=()=>$("modalDefeat").classList.remove("show");
+  }
+
+  async function main(){
+    wireEvents();
+    loadGame();
+    renderHeader();
+
+    await initData();
+    renderShop();
+    renderInventory();
+    renderElements();
+    renderSkills();
+
+    $("battleBox").style.display="none";
+    $("battleHint").textContent="尚未開始冒險。";
+    lockTabs(false);
+    showPanel("panelMain");
+  }
+
+  document.addEventListener("DOMContentLoaded", main);
+})();
+</script>
+</body>
+</html>
